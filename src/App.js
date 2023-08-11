@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { history } from './utils/history';
+import Layout from './template/layout/Layout';
+import HomePage from './components/HomePage';
+import DetailPage from './components/DetailPage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HistoryRouter history={history}>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index path='HomePage' element={<HomePage />} />
+            <Route path='DetailPage/:name' element={<DetailPage />} />
+          </Route>
+        </Routes>
+      </HistoryRouter>
     </div>
   );
 }
